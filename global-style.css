@@ -1,0 +1,131 @@
+/* Master Stylesheet */
+:root {
+  --bg: #fefefe;
+  --accent1: #8b5cf6;
+  --accent2: #f59e0b;
+  --muted: #64748b;
+  --text: #1e293b;
+  --card-bg: #ffffff;
+  --border: #e2e8f0;
+}
+* { box-sizing: border-box; }
+body { 
+  margin: 0; 
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; 
+  background: var(--bg); 
+  color: var(--text); 
+  line-height: 1.6; 
+}
+.container { 
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 0 20px; /* Padding 0 upar-niche, 20 left-right */
+}
+
+/* Header & Nav */
+.header { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 16px 0; 
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap; /* Mobile ke liye */
+  gap: 10px;
+}
+.logo-link { text-decoration: none; color: inherit; }
+.logo { display: flex; gap: 12px; align-items: center; }
+.logo img { height: 48px; }
+.header-right { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.nav { display: flex; gap: 20px; }
+.nav a { text-decoration: none; color: var(--muted); font-weight: 500; transition: color 0.2s; }
+.nav a:hover { color: var(--accent1); }
+.auth-area { display: flex; gap: 10px; align-items: center; }
+.user-info { text-align: right; }
+.user-info .points { color: var(--accent2); margin-left: 10px; }
+
+/* Main Content Wrapper */
+.main-content {
+  padding: 32px 0; /* Content ko header se alag karne ke liye padding */
+}
+
+/* Buttons */
+.btn { 
+  padding: 10px 18px; 
+  border-radius: 12px; 
+  border: 0; 
+  font-weight: 600; 
+  cursor: pointer; 
+  text-decoration: none; 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  transition: all 0.2s; 
+  text-align: center; 
+  font-size: 14px;
+}
+.btn-primary { background: linear-gradient(90deg, var(--accent1), var(--accent2)); color: white; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); }
+.btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+.btn-ghost:hover { background: var(--accent1); color: white; }
+
+/* Cards (Bahut common hai, isliye global rakhein) */
+.card { 
+  background: var(--card-bg); 
+  border-radius: 16px; 
+  padding: 24px; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
+  border: 1px solid var(--border);
+}
+
+/* Modals */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center; }
+.modal.show { display: flex; }
+.modal-content { background: var(--card-bg); border-radius: 16px; padding: 24px; max-width: 400px; width: 90%; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); position: relative; }
+.close { position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--muted); }
+.form { display: flex; flex-direction: column; gap: 12px; }
+.input { padding: 12px; border-radius: 8px; border: 1px solid var(--border); width: 100%; font-size: 16px; }
+.input:focus { outline: none; border-color: var(--accent1); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1); }
+label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 4px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header { flex-direction: column; gap: 16px; }
+  .header-right { flex-direction: column; gap: 16px; }
+  .user-info { text-align: center; }
+}
+
+/* === YE CODE ADD KAREIN === */
+
+/* Right Panel Options Styling */
+.right-panel .options { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+  margin-top: 15px; /* Thoda gap add karein */
+}
+.option-card {
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.02), rgba(245, 158, 11, 0.02));
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.option-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent1);
+}
+.option-card h4 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--accent1); /* Purple color heading ke liye */
+  font-weight: 600;
+}
+.option-card p {
+  margin: 4px 0 0 0; /* Heading ke baad thoda gap */
+  color: var(--muted);
+  font-size: 14px;
+}
+/* ======================== */

@@ -1,0 +1,139 @@
+/* Tiers Page Specific Styles */
+
+/* Header section ko override karein (Global header ki zaroorat nahi) */
+header {
+  display: none; /* Master header (header.php) use hoga */
+}
+
+/* Progress Bar Card */
+#progress-section {
+  margin-bottom: 30px;
+  border-left: 5px solid var(--accent1);
+}
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.progress-header h2 {
+  margin: 0;
+  color: var(--accent1);
+}
+.points-display {
+  font-size: 1.1em;
+  color: var(--text);
+}
+#myProgress {
+  width: 100%;
+  background-color: var(--border);
+  border-radius: 25px;
+  overflow: hidden;
+  height: 30px;
+}
+#myBar {
+  width: 0%;
+  height: 100%;
+  /* Naya Gradient color */
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  font-weight: bold;
+  transition: width 1s ease-in-out;
+  border-radius: 25px;
+}
+#progress-info {
+  margin-top: 10px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Level Cards Grid */
+#level-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.level-card {
+  /* Global 'card' style ka istemaal */
+  background-color: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: all 0.2s ease;
+  opacity: 0.7; /* Jo locked hain woh fade rahenge */
+}
+.level-card h3 {
+  color: var(--muted); /* Locked level color */
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 1.4em;
+}
+.level-card .target {
+  color: var(--text);
+  font-size: 0.9em;
+  margin: 5px 0;
+}
+.level-card .reward {
+  color: var(--accent2);
+  font-weight: bold;
+  font-size: 0.95em;
+  margin-top: 10px;
+}
+
+/* Milestone Cards */
+.milestone {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(255, 255, 255, 1));
+  border-color: var(--accent2);
+}
+.milestone h3 {
+  color: var(--accent2);
+}
+
+/* Unlocked Cards */
+.level-card.unlocked {
+  opacity: 1; /* Unlocked ko poora dikhayein */
+  border-color: var(--accent1);
+}
+.level-card.unlocked h3 {
+  color: var(--accent1); /* Unlocked level color */
+}
+
+/* Spin Wheel */
+#spin-section {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 5px solid var(--accent2);
+}
+#spin-section h2 {
+  color: var(--accent2);
+}
+.wheel {
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  border: 8px dashed var(--accent1);
+  border-radius: 50%;
+  background: conic-gradient(var(--accent1), var(--accent2), #ec4899, #34d399, var(--accent1));
+  transition: transform 4s ease-out;
+}
+#spin-btn {
+  /* 'btn' aur 'btn-primary' classes (HTML mein) ab global style se aa rahi hain */
+  margin-top: 10px;
+  font-size: 1.1em;
+}
+#result {
+  margin-top: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--accent1);
+}
+
+.hidden {
+  display: none;
+}

@@ -1,0 +1,173 @@
+<?php
+// Session check (ye file redirect nahi karegi)
+include 'php/db_connect.php'; 
+?>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Believers Loyalty Program</title>
+  <style>
+    :root {
+      --bg: #fefefe; --accent1: #8b5cf6; --accent2: #f59e0b; --accent3: #ec4899;
+      --muted: #64748b; --text: #1e293b; --card-bg: #ffffff; --border: #e2e8f0;
+    }
+    * { box-sizing: border-box }
+    body { margin: 0; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: var(--bg); color: var(--text); line-height: 1.6 }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px }
+    .header { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border) }
+    .logo { display: flex; gap: 12px; align-items: center }
+    .logo img { height: 48px }
+    .nav { display: flex; gap: 20px }
+    .nav a { text-decoration: none; color: var(--muted); font-weight: 500; transition: color 0.2s }
+    .nav a:hover { color: var(--accent1) }
+    .hero { display: flex; flex-wrap: wrap; gap: 32px; margin-top: 32px; align-items: center; justify-content: center }
+    .card { background: var(--card-bg); border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); border: 1px solid var(--border); flex: 1 1 400px; min-width: 280px; max-width: 100% }
+    .h1 { font-size: 32px; margin: 0; font-weight: 700 }
+    .p { color: var(--muted); margin: 12px 0 }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 20px }
+    .feature { padding: 16px; border-radius: 12px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(245, 158, 11, 0.03)); border: 1px solid var(--border) }
+    .cta { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap }
+    .btn { padding: 12px 20px; border-radius: 12px; border: 0; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; transition: all 0.2s; flex: 1 1 auto; text-align: center; min-width: 140px }
+    .btn-primary { background: linear-gradient(90deg, var(--accent1), var(--accent2)); color: white }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted) }
+    .btn-ghost:hover { background: var(--accent1); color: white }
+    .small { font-size: 14px; color: var(--muted) }
+    .right-panel .options { display: flex; flex-direction: column; gap: 16px }
+    .option-card { padding: 16px; border-radius: 12px; border: 1px solid var(--border); background: linear-gradient(135deg, rgba(139, 92, 246, 0.02), rgba(245, 158, 11, 0.02)); cursor: pointer; transition: all 0.2s; text-align: center }
+    .option-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); border-color: var(--accent1) }
+    .option-card h4 { margin: 0; font-size: 18px; color: var(--accent1) }
+    .option-card p { margin: 4px 0; color: var(--muted); font-size: 14px }
+    /* Modal */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center }
+    .modal.show { display: flex }
+    .modal-content { background: var(--card-bg); border-radius: 16px; padding: 24px; max-width: 400px; width: 90%; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); position: relative; }
+    .close { position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--muted) }
+    .form { display: flex; flex-direction: column; gap: 12px }
+    .input { padding: 12px; border-radius: 8px; border: 1px solid var(--border); width: 100%; font-size: 16px }
+    .input:focus { outline: none; border-color: var(--accent1); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) }
+    label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 4px }
+    /* Responsive */
+    @media (max-width:768px) { .hero { flex-direction: column } .features { grid-template-columns: 1fr } .right-panel { width: 100% } .header { flex-direction: column; gap: 16px } .nav { flex-wrap: wrap } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='52'><rect rx='12' width='160' height='52' fill='%238b5cf6'/><text x='20' y='34' font-family='Arial' font-size='20' fill='white'>Believers</text></svg>" alt="Believers logo">
+        <div style="line-height:1">
+          <div style="font-weight:800">Believers Loyalty</div>
+          <div style="font-size:12px;color:var(--muted)">Rewards that keep you returning</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <nav class="nav" aria-label="Main">
+          <a class="nav-link" href="index.php">Home</a>
+          <a class="nav-link" href="dashboard.php">Menu</a>
+          <a class="nav-link" href="contact.html">Support/Contact</a>
+          <a class="nav-link" href="premium.php">Premium Membership</a>
+          </nav>
+        
+        <div id="auth-area">
+          <?php if (isset($_SESSION['user_id'])): ?>
+            <a href="dashboard.php" class="btn btn-primary">Go to Dashboard</a>
+            <a href="php/logout.php" class="btn btn-ghost">Logout</a>
+          <?php else: ?>
+            <button id="show-signup" class="btn btn-primary">Join</button>
+            <button id="show-login" class="btn btn-ghost">Log in</button>
+          <?php endif; ?>
+        </div>
+        </div>
+    </header>
+
+    <main id="view-home" class="view fade-in">
+      <section class="hero">
+        <div class="card">
+          <h1 class="h1">Keep customers coming back — beautifully.</h1>
+          <p class="p">Believers is a modern loyalty program: points, tiers, referrals, cashback and instant rewards — all in one place. Make every purchase count.</p>
+          <div class="features">
+            <div class="feature"><strong>Points & Rewards</strong><div class="small">Earn points on every purchase and redeem for discounts & freebies.</div></div>
+            <div class="feature"><strong>Referral Bonuses</strong><div class="small">Give and get points when friends join with your code.</div></div>
+            <div class="feature"><strong>Tiered Benefits</strong><div class="small">Bronze → Silver → Gold → Platinum — unlock better perks at higher tiers.</div></div>
+          </div>
+          <div class="cta">
+            <a class="btn btn-primary" id="cta-join">Join now — free 200 points</a>
+            <a class="btn btn-ghost" href="dashboard.php">See features</a>
+            </div>
+        </div>
+        <aside class="card right-panel">
+          <h3 style="margin:0">Get Started Quickly</h3>
+          <p class="small">Choose how you'd like to begin your loyalty journey.</p>
+          <div class="options">
+            <div class="option-card" id="option-demo"><h4>Try Demo Account</h4><p>Explore with pre-loaded points and features<br> [no sign-up needed!]</p></div>
+            <div class="option-card" id="option-signup"><h4>Create Account</h4><p>Sign up fast! to get your welcome bonus instantly.</p></div>
+          </div>
+          <hr style="margin:20px 0">
+          <div style="font-size:14px;color:var(--muted)">Secure sign-up, encrypted password storage, and easy rewards tracking.</div>
+        </aside>
+      </section>
+    </main>
+
+    <div id="signup-modal" class="modal">
+      <div class="modal-content">
+        <button class="close" id="close-signup-modal">&times;</button>
+        <h3>Create your Believers account</h3>
+        <form id="quick-signup" class="form" autocomplete="off" action="php/signup.php" method="POST">
+          <label>Name <input class="input" name="name" required></label>
+          <label>Email <input class="input" name="email" type="email" required></label>
+          <label>Password <input class="input" name="password" type="password" minlength="6" required></label>
+          <div style="margin-top:16px"><button class="btn btn-primary" type="submit">Create account & Get 200 Points</button></div>
+        </form>
+      </div>
+    </div>
+    
+    <div id="login-modal" class="modal">
+      <div class="modal-content">
+        <button class="close" id="close-login-modal">&times;</button>
+        <h3>Welcome Back!</h3>
+        <form id="quick-login" class="form" autocomplete="off" action="php/login.php" method="POST">
+          <label>Email <input class="input" name="email" type="email" required></label>
+          <label>Password <input class="input" name="password" type="password" required></label>
+          <div style="margin-top:16px"><button class="btn btn-primary" type="submit">Log In</button></div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // === YAHAN CODE UPDATE HUA HAI (Robust JS) ===
+    const signupModal = document.getElementById('signup-modal');
+    const loginModal = document.getElementById('login-modal');
+
+    // Close buttons
+    if(signupModal) document.getElementById('close-signup-modal').addEventListener('click', () => signupModal.classList.remove('show'));
+    if(loginModal) document.getElementById('close-login-modal').addEventListener('click', () => loginModal.classList.remove('show'));
+
+    // Show Signup Modal buttons (Ye sirf tabhi milenge jab user logged out hai)
+    if(document.getElementById('show-signup')) {
+        document.getElementById('show-signup').addEventListener('click', () => signupModal.classList.add('show'));
+    }
+    if(document.getElementById('cta-join')) {
+        document.getElementById('cta-join').addEventListener('click', () => signupModal.classList.add('show'));
+    }
+    if(document.getElementById('option-signup')) {
+        document.getElementById('option-signup').addEventListener('click', () => signupModal.classList.add('show'));
+    }
+
+    // Show Login Modal button (Ye sirf tabhi milega jab user logged out hai)
+    if(document.getElementById('show-login')) {
+        document.getElementById('show-login').addEventListener('click', () => loginModal.classList.add('show'));
+    }
+
+    // Demo Account alert
+    if(document.getElementById('option-demo')) {
+        document.getElementById('option-demo').addEventListener('click', () => alert('Demo account feature will be available soon!'));
+    }
+    // ==================================
+  </script>
+</body>
+</html>
